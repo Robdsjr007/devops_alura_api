@@ -1,0 +1,15 @@
+services:
+  # Nome do serviço da nossa API.
+  api:
+    build: .
+    container_name: devops_alura_api
+    ports:
+      - "8000:8000"
+    # Monta o diretório atual do host no diretório /app do contêiner.
+    # Isso permite a persistência do banco de dados SQLite (escola.db) no host
+    # e o live-reloading do código durante o desenvolvimento.
+    volumes:
+      - .:/app
+    # Sobrescreve o CMD do Dockerfile para incluir a flag --reload,
+    # que é útil para o ambiente de desenvolvimento.
+    command: uvicorn app:app --host 0.0.0.0 --port 8000
